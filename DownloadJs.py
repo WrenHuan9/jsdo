@@ -116,9 +116,6 @@ class DownloadJs():
                 self.jsRealPaths = Utils().generateFullPath(self.jsPaths, baseUrl, urlparse(self.url))
                 self.downloadJs(projectPath, flag)
 
-
-
-
     def creatInsideJs(self, projectPath, jstag, scriptInside):  # 生成html的script的文件
         try:
             jsFilename = "MainPage" + jstag

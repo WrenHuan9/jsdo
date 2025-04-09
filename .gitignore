@@ -1,0 +1,6 @@
+/venv
+/tmp
+/__pycache__
+/.idea
+.gitignore
+.DS_Store

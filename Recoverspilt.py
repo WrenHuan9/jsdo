@@ -21,7 +21,6 @@ class RecoverSpilt():
 
     def jsCodeCompile(self, jsCode, projectPath):
         try:
-            domain = urlparse(self.baseUrl).netloc
             print(Utils().tellTime() + "正在处理异步加载代码中...")
             variable = re.findall(r'\[.*?\]', jsCode)
             if "[" and "]" in variable[0]:
@@ -67,22 +66,18 @@ class RecoverSpilt():
             if pattern:
                 jsCodeList = pattern.findall(jsFile)
                 for jsCode in jsCodeList:
-                    if len(jsCode) < 30000:
+                    if len(jsCode) < 300000: # js长度可能超过有效值（原值30k），扩大校验范围
                         jsCode = "\"" + jsCode + ".js\""
                         self.jsCodeCompile(jsCode, projectPath)
 
     def getRealFilePath(self, jsFileNames, jsUrlpath, projectPath):
         jsRealPaths = []
-        res = urlparse(jsUrlpath)
         base_url = Utils().getBaseUrl(jsUrlpath)
         for jsFileName in jsFileNames:
             # jsFileName = Utils().getFilename(jsFileName)  # 获取js名称
             jsFileName = base_url + jsFileName
             jsRealPaths.append(jsFileName)
         try:
-            domain = res.netloc
-            if ":" in domain:
-                domain = str(domain).replace(":", "_")
             DownloadJs(self.jsFileNames, jsRealPaths, self.options, self.baseUrl).downloadJs(projectPath, False)
             print("DownloadJs功能正常")
         except Exception as e:

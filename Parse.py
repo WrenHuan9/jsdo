@@ -51,6 +51,11 @@ class ParseMainPage():
             except:
                 pass
         try:
+            self.scriptCrawling(demo)
+            print(Utils().tellTime() + "scriptCrawling模块正常")
+        except Exception as e:
+            print("[Err] %s" % e)
+        try:
             self.dealJs(self.jsPaths)
             print(Utils().tellTime() + "dealjs函数正常")
         except Exception as e:
@@ -61,9 +66,6 @@ class ParseMainPage():
         baseUrl = Utils().getBaseUrl(self.url)
         self.jsRealPaths = Utils().generateFullPath(js_paths, baseUrl, res)
         print(Utils().tellTime() + "网页解析完毕，共发现" + str(len(self.jsRealPaths)) + "个JS文件")
-        domain = res.netloc
-        if ":" in domain:
-            domain = str(domain).replace(":", "_")
         DownloadJs(js_paths, self.jsRealPaths, self.options, self.url).downloadJs(self.projectPath, False)
 
     def scriptCrawling(self, demo):
@@ -84,4 +86,5 @@ class ParseMainPage():
 
     def parseMainPageStart(self):
         self.requestUrl()
-        return self.url
+        result = [self.url, self.jsRealPaths]
+        return result
