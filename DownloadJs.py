@@ -81,12 +81,13 @@ class DownloadJs():
             jsTag = Utils().creatTag(6)
             print(Utils().tellTime() + "正在下载：" + jsFilename)
             sslFlag = int(self.options.ssl_flag)
+            timeout = int(self.options.timeout)
             try:
                 if sslFlag == 1:
-                    jsFileResponse = requests.get(url=jsRealPath, headers=header, proxies=self.proxy_data, timeout=30,
+                    jsFileResponse = requests.get(url=jsRealPath, headers=header, proxies=self.proxy_data, timeout=timeout,
                                                   verify=False)
                 else:
-                    jsFileResponse = requests.get(url=jsRealPath, proxies=self.proxy_data, timeout=30, headers=header)
+                    jsFileResponse = requests.get(url=jsRealPath, proxies=self.proxy_data, timeout=timeout, headers=header)
                 if jsFileResponse.status_code == 404:
                     count += 1
                 else:

@@ -16,7 +16,9 @@ class CommandLines():
         parse = optparse.OptionParser()
         parse.add_option('-u', '--url', dest='url', help='Please Enter the Target Site')
         parse.add_option('-p', '--proxy', dest='proxy', type=str, help='Please Enter your own Proxy Address')
-        parse.add_option('-f', '--flag', dest='ssl_flag', default='0', type=str, help='SSL SEC FLAG')
+        parse.add_option('-f', '--flag', dest='ssl_flag', default='0', type=str, help='SSL Sec Flag')
+        parse.add_option('-t', '--timeout', dest='timeout', default='30', type=str, help='Set timeout for requests')
+        parse.add_option('-m', '--mode', dest='mode', default='0', type=str, help='Choose webpack mode')
         (options, args) = parse.parse_args()
         print(KITTY_BANNER)
         if options.url is None:
