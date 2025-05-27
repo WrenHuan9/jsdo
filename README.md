@@ -6,6 +6,10 @@ Instructions:
 
 ​	-f https需设置为-f 1
 
+​	-t 指定js文件请求超时时间（适用于js文件过大时）
+
+​	-m 新增 webpack 打包模式适配，默认值为0，代表常规chunk模式
+
 
 
 [关于网站地址]
